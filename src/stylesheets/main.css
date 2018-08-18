@@ -18,26 +18,41 @@ body,
 }
 
 .panels {
+  --width: 100vw;
+  --totalMargin: 4.5vw;
   --panel-count: 1;
+  --margin: (var(--totalMargin) / (var(--panel-count) - 1));
   display: grid;
-  grid-gap: 1rem;
+  grid-gap: 0.5rem;
   grid-auto-flow: column;
   grid-auto-rows: 100%;
   width: fit-content;
-  padding: 1rem;
+  padding: 0.5rem calc((100vw - var(--width)) / 2 + var(--totalMargin));
+}
+
+@media (min-width: 29rem) {
+  .panels {
+    --width: 25rem;
+    --totalMargin: 2rem;
+  }
 }
 
 .panel {
   --order: 0;
+  --panel-width: calc(var(--width) - var(--totalMargin) * 2);
   /* scroll-snap-align: center; */
-  width: 91vw;
-  max-width: 25rem;
+  width: var(--panel-width);
+  /* max-width: 25rem; */
   position: sticky;
-  left: calc(var(--order) * 1rem);
-  right: calc((var(--panel-count) - var(--order)) * 1rem - 25rem);
+  left: calc(var(--order) * var(--margin));
+  right: calc(
+    ((var(--panel-count) - 1) - var(--order)) * var(--margin) -
+      var(--panel-width)
+  );
   z-index: var(--order);
   background-color: black;
-  border: 1px solid;
+  border: 2px solid;
+  /* border-radius: 0.25rem; */
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -45,8 +60,4 @@ body,
 
 .scrollable {
   padding: 1rem;
-}
-
-h1 {
-  height: 300vh;
 }
