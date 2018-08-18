@@ -1,0 +1,52 @@
+html {
+  font-size: 150%;
+  color: white;
+  background-color: #222;
+}
+
+body {
+  line-height: 1rem;
+  font-size: 0.75rem;
+  /* scroll-snap-type: x mandatory; */
+}
+
+html,
+body,
+#root,
+.panels {
+  height: 100%;
+}
+
+.panels {
+  --panel-count: 1;
+  display: grid;
+  grid-gap: 1rem;
+  grid-auto-flow: column;
+  grid-auto-rows: 100%;
+  width: fit-content;
+  padding: 1rem;
+}
+
+.panel {
+  --order: 0;
+  /* scroll-snap-align: center; */
+  width: 91vw;
+  max-width: 25rem;
+  position: sticky;
+  left: calc(var(--order) * 1rem);
+  right: calc((var(--panel-count) - var(--order)) * 1rem - 25rem);
+  z-index: var(--order);
+  background-color: black;
+  border: 1px solid;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scrollable {
+  padding: 1rem;
+}
+
+h1 {
+  height: 300vh;
+}
